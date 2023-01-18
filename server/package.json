@@ -1,0 +1,30 @@
+{
+  "name": "nlw-setup-ignite",
+  "version": "1.0.0",
+  "description": "Aplicação **Habits** desenvolvida em React Native para o gerenciamento de hábitos do usuário.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "tsx watch src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willian-moreno/nlw-setup-ignite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willian-moreno/nlw-setup-ignite/issues"
+  },
+  "homepage": "https://github.com/willian-moreno/nlw-setup-ignite#readme",
+  "devDependencies": {
+    "prisma": "^4.9.0",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@prisma/client": "^4.9.0",
+    "fastify": "^4.11.0"
+  }
+}
