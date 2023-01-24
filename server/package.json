@@ -4,7 +4,7 @@
   "description": "Aplicação **Habits** desenvolvida em React Native para o gerenciamento de hábitos do usuário.",
   "main": "index.js",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "repository": {
     "type": "git",
