@@ -1,6 +1,6 @@
-import '@/plugins/moment';
 import Loading from '@/components/Loading';
-import { Home } from '@/screens/Home';
+import '@/plugins/moment';
+import { Routes } from '@/routes';
 import {
   Inter_400Regular,
   Inter_600SemiBold,
@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <Home />
+      <Routes />
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={'transparent'}
