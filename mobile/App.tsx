@@ -8,7 +8,7 @@ import {
   Inter_800ExtraBold,
   useFonts,
 } from '@expo-google-fonts/inter';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,7 +18,12 @@ export default function App() {
     Inter_800ExtraBold,
   });
 
-  if (!fontsLoaded) return <Loading />;
+  if (!fontsLoaded)
+    return (
+      <View className="flex-1 bg-background">
+        <Loading />
+      </View>
+    );
 
   return (
     <>

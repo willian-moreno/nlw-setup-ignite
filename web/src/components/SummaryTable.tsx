@@ -1,12 +1,38 @@
-import { HabitDay } from '@components/HabitDay';
-import { generateDatesFromYearBeginning } from '@utils/generate-dates-from-year-beginning';
+import { HabitDay } from '@/components/HabitDay';
+import { api } from '@/plugins/axios';
+import { generateDatesFromYearBeginning } from '@/utils/generate-dates-from-year-beginning';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const characterWeekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 const summaryDates = generateDatesFromYearBeginning();
 const minimumSummaryDatesSize = 18 * 7;
 const amountOfDaysToFill = minimumSummaryDatesSize - summaryDates.length;
 
+type SummaryResponse = {
+  id: string;
+  date: string;
+  completed: number;
+  amount: number;
+}[];
+
 export function SummaryTable() {
+  const [summary, setSummary] = useState<SummaryResponse>([]);
+
+  async function fetchSummary() {
+    try {
+      const { data } = await api.get('summary');
+      setSummary(data);
+    } catch (error) {
+      toast.error('Não foi possível obter as informações dos hábitos.');
+    }
+  }
+
+  useEffect(() => {
+    fetchSummary();
+  }, []);
+
   return (
     <div className="w-full flex">
       <div className="grid grid-rows-7 grid-flow-row gap-3">
@@ -22,15 +48,21 @@ export function SummaryTable() {
         })}
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3 overflow-x-auto">
-        {summaryDates.map((date) => {
-          return (
-            <HabitDay
-              amount={10}
-              completed={Math.round(Math.random() * 10)}
-              key={date.toString()}
-            />
-          );
-        })}
+        {summary.length &&
+          summaryDates.map((date) => {
+            const dayInSummary = summary.find((day) => {
+              return moment(date).isSame(day.date, 'day');
+            });
+
+            return (
+              <HabitDay
+                date={date}
+                amount={dayInSummary?.amount}
+                defaultCompleted={dayInSummary?.completed}
+                key={date.toString()}
+              />
+            );
+          })}
 
         {amountOfDaysToFill > 0 &&
           Array.from({ length: amountOfDaysToFill }).map((_, index) => {
