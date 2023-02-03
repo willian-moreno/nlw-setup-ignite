@@ -43,7 +43,6 @@ async function run() {
           create: [
             { week_day: 3 },
             { week_day: 4 },
-            { week_day: 5 },
           ]
         }
       }
@@ -60,7 +59,6 @@ async function run() {
             { week_day: 2 },
             { week_day: 3 },
             { week_day: 4 },
-            { week_day: 5 },
           ]
         }
       }

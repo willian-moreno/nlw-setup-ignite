@@ -1,12 +1,12 @@
 import { Checkbox } from '@/components/Checkbox';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { api } from '@/plugins/axios';
 import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface HabitsListProps {
   date: Date;
-  onCompletedChanged: (completed: number) => void;
+  onCompletedChanged: (amount: number, completed: number) => void;
 }
 
 type HabitsResponse = {
@@ -56,7 +56,7 @@ export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
         completedHabits,
       });
 
-      onCompletedChanged(completedHabits.length);
+      onCompletedChanged(habits!.possibleHabits.length, completedHabits.length);
     } catch (error) {
       toast.error('Não foi possível alterar o estado desse hábito.');
     }

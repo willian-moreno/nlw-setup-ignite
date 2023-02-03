@@ -6,21 +6,36 @@ import {
   View,
 } from 'react-native';
 import colors from 'tailwindcss/colors';
+import clsx from 'clsx';
 
 interface CheckboxProps extends TouchableOpacityProps {
   title: string;
   checked?: boolean;
+  disabled?: boolean;
 }
 
-export function Checkbox({ title, checked = false, ...rest }: CheckboxProps) {
+export function Checkbox({
+  title,
+  checked = false,
+  disabled = false,
+  ...rest
+}: CheckboxProps) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       className="flex-row mb-2 items-center"
+      disabled={disabled}
       {...rest}
     >
       {checked ? (
-        <View className="w-8 h-8 bg-green-500 rounded-lg items-center justify-center">
+        <View
+          className={clsx(
+            'w-8 h-8 bg-green-500 rounded-lg items-center justify-center',
+            {
+              'opacity-50': disabled,
+            }
+          )}
+        >
           <Feather
             name="check"
             size={20}
@@ -28,10 +43,16 @@ export function Checkbox({ title, checked = false, ...rest }: CheckboxProps) {
           />
         </View>
       ) : (
-        <View className="w-8 h-8 bg-zinc-900 rounded-lg items-center justify-center" />
+        <View className="w-8 h-8 bg-zinc-900 rounded-lg items-center justify-center border-2 border-zinc-800" />
       )}
 
-      <Text className="text-white text-base ml-3 text-semibold">{title}</Text>
+      <Text
+        className={clsx('text-white text-base ml-3 text-semibold', {
+          'opacity-50': disabled,
+        })}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 }

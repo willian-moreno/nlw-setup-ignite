@@ -1,12 +1,11 @@
 import clsx from 'clsx';
-import { generateProgressPercentage } from '../utils/generate-progress-percentage';
+import moment from 'moment';
 import {
   Dimensions,
-  Text,
   TouchableOpacity,
-  TouchableOpacityProps,
+  TouchableOpacityProps
 } from 'react-native';
-import moment from 'moment';
+import { generateProgressPercentage } from '../utils/generate-progress-percentage';
 
 const WEEK_DAYS = 7;
 const SCREEN_HORIZONTAL_PADDING = (32 * 2) / 5;
@@ -27,7 +26,6 @@ export function HabitDay({
   date,
   ...rest
 }: HabitDayProps) {
-  const day = date.getDate();
   const completedPercentage = generateProgressPercentage(amount, completed);
   const today = moment().startOf('day').toDate();
   const isCurrentDay = moment(date).isSame(today);
@@ -47,14 +45,12 @@ export function HabitDay({
           'bg-violet-600 border-violet-500':
             completedPercentage >= 60 && completedPercentage < 80,
           'bg-violet-500 border-violet-400': completedPercentage >= 80,
-          'border-white border-4': isCurrentDay,
+          'border-white border-3': isCurrentDay,
         }
       )}
       activeOpacity={0.7}
       style={{ width: DAY_SIZE, height: DAY_SIZE }}
       {...rest}
-    >
-      <Text className="text-white text-base opacity-20">{day}</Text>
-    </TouchableOpacity>
+    />
   );
 }

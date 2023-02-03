@@ -1,28 +1,31 @@
+import { HabitsList } from '@/components/HabitsList';
+import { ProgressBar } from '@/components/ProgressBar';
 import * as Popover from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import moment from 'moment';
-import { HabitsList } from '@/components/HabitsList';
-import { ProgressBar } from '@/components/ProgressBar';
 import { useState } from 'react';
 
 interface HabitDayProps {
   defaultCompleted?: number;
-  amount?: number;
+  defaultAmount?: number;
   date: Date;
 }
 
-export function HabitDay({ amount = 0, defaultCompleted = 0, date }: HabitDayProps) {
+export function HabitDay({ defaultAmount = 0, defaultCompleted = 0, date }: HabitDayProps) {
   const [completed, setCompleted] = useState(defaultCompleted);
+  const [amount, setAmount] = useState(defaultAmount);
 
-  const completedPercentage = amount > 0 ? Math.round((completed / amount) * 100) : 0;
+  const completedPercentage = Math.round((completed / amount) * 100) || 0;
+
   const dayAndMonth = moment(date).format('DD/MM');
   const dayOfWeek = moment(date).format('dddd');
 
   const today = moment().startOf('day').toDate();
   const isCurrentDay = moment(date).isSame(today);
 
-  function handleCompletedChanged(completed: number) {
+  function handleCompletedChanged(amount: number, completed: number) {
     setCompleted(completed);
+    setAmount(amount);
   }
 
   return (
