@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import colors from 'tailwindcss/colors';
 import clsx from 'clsx';
+import Animated, { ZoomIn, ZoomOut } from 'react-native-reanimated';
 
 interface CheckboxProps extends TouchableOpacityProps {
   title: string;
@@ -28,20 +29,22 @@ export function Checkbox({
       {...rest}
     >
       {checked ? (
-        <View
+        <Animated.View
           className={clsx(
             'w-8 h-8 bg-green-500 rounded-lg items-center justify-center',
             {
               'opacity-50': disabled,
             }
           )}
+          entering={ZoomIn}
+          exiting={ZoomOut}
         >
           <Feather
             name="check"
             size={20}
             color={colors.white}
           />
-        </View>
+        </Animated.View>
       ) : (
         <View className="w-8 h-8 bg-zinc-900 rounded-lg items-center justify-center border-2 border-zinc-800" />
       )}
