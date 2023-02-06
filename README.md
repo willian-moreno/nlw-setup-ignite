@@ -4,7 +4,7 @@
 
 ## Descrição
 
-Aplicação **Habits** desenvolvida em React Native para o gerenciamento de hábitos do usuário.
+Aplicação **Habits** desenvolvida em React e React Native para o gerenciamento de hábitos do usuário.
 
 ## Links úteis
 
